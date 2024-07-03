@@ -2,133 +2,56 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather forecast</title>
+    <title>Weather forecast web application</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    *{
-        padding: 0;
-        margin: 0;
-    }
-    .searchbox{
-        display: flex;
-        /* width: 300px;
-        height: 50px; */
-        justify-content: center;
-    }
-    body{
-        
-        /* background-image: linear-gradient(to top left,black,rgb(4, 255, 175),rgb(0, 0, 0));
-        height: 100vh;
-        width: 100%; */
-        background: linear-gradient(45deg, rgba(0,232,255,1) 0%, rgb(250,0,255) 100%);
-    background-size: 200% 200%;
-    animation: gradient 3s ease infinite;
-    
-        justify-content: center;
-        align-items: center;
-        display: flex;
-
-
-    }
-    .weather-container{
-        width: 400px;
-        height: 500px;
-        border: 3px solid rgb(5, 190, 223);
-        justify-content: center;
-        align-items: center;
-        padding: 10px;
-        border-radius: 20px;
-        margin-top: 40px;
-        box-shadow: -1px 1px 5px 5px rgb(0, 145, 255) ;
-        color: black;
-    }
-    input{
-        height: 50px;
-        width: 300px;
-        border-radius: 40px;
-        padding: 5px;
-        background:white;
-        border:none;
-        font-size: 25px;
-        text-align: left;
-        color: rgb(252, 253, 255);
-        font-weight: 800;
-        font-family: Arial, Helvetica, sans-serif;
-        text-align: left;
-        
-    }
-    .searchbox span img{
-        height: 50px;
-        width: 50px;
-        border: none;
-        margin-left: 10px;
-        border-radius: 50%;
-        padding: 5px;
-        
-        background-color: white;
-
-    }
-    .weather-element span img{
-        height: 100px;
-        width: 100px;
-    }
-    .weather-element{
-        display: block;
-        /* height: 300px; */
-
-    }
-    .humiditycontainer{
-        display: flex;
-    }
-    input{
-        color: black;
-    outline: none;
-    }
-
-</style>
 <body>
-    <div class="weather-container">
-        <div class="searchbox">
-            <span class="text-box"><input type="text" placeholder="Enter your city"></span>
-            <span> <button onclick="getWeather()" style="border: none; background: none;"><img id="search" src="wheather forecast/search.png"></button></span>
-        </div>
-        <div class="weather-element">
-            <div class="weather-element-vertical">
-            <span><img id="weather icon" src="wheather forecast/cloudy.png"></span>
-            <span id="temperature"><i>22°C</i></span>
-            <span><i>new york</i></span>
+    <div class="container">
+        <div class="header">
+            <div class="search-box">
+                <input type="text" placeholder="Enter your location" class="input-box">
+
+                <button class="fa-solid fa-magnifying-glass" id="searchBtn"><img id="searchBtn" src="wheather forecast/search.png" style="height: 22px; width: 22px;"></button>
             </div>
-            <div class="humiditycontainer">
-                <div class="Humidity">
-                    <span><img id="humidity"  src="wheather forecast/humidity.png">humidity</span>
+        </div>
+
+        <div class="location-not-found">
+            <h1>Sorry, Location not found!!!</h1>
+            <img src="/wheather forecast/no-results.png" alt="404 Error">
+        </div>
+
+        <div class="weather-body">
+            <img src="/wheather forecast/cloudy.png" alt="Weather Image" class="weather-img">
+
+            <div class="weather-box">
+                <p class="temperature">0 <sup>°C</sup></p>
+                <p class="description">light rain</p>
+            </div>
+
+            <div class="weather-details">
+                <div class="humidity">
+                    <i class="fa-sharp fa-solid fa-droplet"></i>
+                    <div class="text">
+                        <span id="humidity">45%</span>
+                        <p>Humidity</p>
+                    </div>
                 </div>
-                <div class="windspeed" id="wind-speed"><span><img id="wind-speed" src="wheather forecast/wind.png">wind speed</span></div>
+
+                <div class="wind">
+                    <i class="fa-solid fa-wind"></i>
+                    <div class="text">
+                        <span id="wind-speed">12Km/H</span>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const apiURL = 'https://api.openweathermap.org/data/2.5/weather?q=&appid=${"877b9c61efb683b0f8df427c42c932d2"}';
-         
-         function getWeather() {
-           const location = document.getElementById('location').value;
-           fetch(`${'https://api.openweathermap.org/data/2.5/weather?q=&appid=${"877b9c61efb683b0f8df427c42c932d2"}'}?q=${location}&units=imperial&appid=877b9c61efb683b0f8df427c42c932d2`)
-             .then(response => response.json())
-             .then(data => {
-               const climate = data.weather[0].main;
-               const temperature = data.main.temp;
-               const humidity = data.main.humidity;
-               const windSpeed = data.wind.speed;
-               document.getElementById('climate').innerText = `Climate: ${climate}`;
-               document.getElementById('temperature').innerText = `Temperature: ${temperature}°F`;
-               document.getElementById('humidity').innerText = `Humidity: ${humidity}%`;
-               document.getElementById('wind-speed').innerText = `Wind Speed: ${windSpeed} mph`;
-             })
-             .catch(error => console.error(error));
-         }
-         
-           
-       </script>
+
+    <script src="script.js"></script>
+    <script src="https://kit.fontawesome.com/595a890311.js" crossorigin="anonymous"></script>
 </body>
 </html>
